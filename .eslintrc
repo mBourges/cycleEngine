@@ -1,0 +1,20 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "plugins": [
+      "standard",
+      "promise",
+      "import"
+  ],
+  "parserOptions": {
+      "sourceType": "module"
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": 0
+  }
+}

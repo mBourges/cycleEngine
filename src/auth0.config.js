@@ -1,10 +1,5 @@
-console.log('windows location auth', JSON.stringify({
-  pathname: window.location.pathname,
-  search: window.location.search
-}))
-
 export const clientId = '6eRUnFnqvHLY878KJ1V8Rc02dXgTWGke';
-export const domain = 'quard.auth0.com'
+export const domain = 'quard.auth0.com';
 export const options = {
   storageKey: 'id_token',
   lockOptions: {
@@ -23,4 +18,4 @@ export const options = {
       }
     }
   }
-}
+};
