@@ -20,6 +20,12 @@ export default [
       component: xs.fromPromise(System.import('./student/profile'))
     })
   }, {
+    path: '/test',
+    action: (context) => ({
+      context,
+      component: xs.fromPromise(System.import('./test'))
+    })
+  }, {
     path: '*',
     action: (context) => ({
       context,

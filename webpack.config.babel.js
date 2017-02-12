@@ -20,8 +20,8 @@ module.exports = env => {
         '@cycle/run',
         // '@cycle/xstream-run',
         'xstream',
-        // '@cycle/history',
-        // '@cycle/isolate',
+        '@cycle/history',
+        '@cycle/isolate',
         // 'cyclic-router',
         // 'history',
         // 'switch-path'
@@ -31,7 +31,7 @@ module.exports = env => {
       ]
     },
     output: {
-      filename: env.prod ? 'bundle.[name].[chunkhash].js' : 'bundle.[name].js',
+      filename: env.prod ? 'public/js/bundle.[name].[chunkhash].js' : 'public/js/bundle.[name].js',
       path: resolve('dist'),
       pathinfo: !env.prod,
       publicPath: '/'

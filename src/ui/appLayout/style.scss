@@ -1,0 +1,52 @@
+@import '../variables.scss';
+
+.pusher, .full.height {
+  height: 100%;
+}
+
+.full.height {
+  display: flex;
+  flex-direction: row;
+}
+
+.article {
+  flex: 1 1 auto;
+  min-width: 0px;
+  overflow-y: auto;
+}
+
+.article__inner {
+  padding: 3em 0.5em;
+
+  @media screen and (min-device-width: $break-large) {
+    padding: 1em 0.5em;
+  }
+}
+
+
+.toc {
+  position: relative;
+  z-index: 1;
+  background-color: #1b1c1d;
+  width: 250px;
+  flex: 0 0 auto;
+  overflow-y: auto;
+
+  @media screen and (max-device-width: $break-large) {
+    display: none;
+  }
+}
+
+.mobile.ui.fixed.inverted.main.menu {
+  @media screen and (min-device-width: $break-large) {
+    display: none;
+  }
+}
+
+.mobile > .ui.container {
+  position: relative;
+  margin-left: 3em !important;
+  margin-right: 3em !important;
+  width: auto !important;
+  max-width: 960px !important;
+}
