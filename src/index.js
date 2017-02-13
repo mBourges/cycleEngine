@@ -1,17 +1,15 @@
 import xs from 'xstream';
 import { run } from '@cycle/run';
-import { makeDOMDriver, div, h2, a, button } from '@cycle/dom';
+import { makeDOMDriver } from '@cycle/dom';
 import { makeHistoryDriver, captureClicks } from '@cycle/history';
+import 'normalize.css/normalize.css';
+import 'semantic-ui-css/semantic.min.css';
 import makeRouterDriver from './drivers/router';
 import makeAuth0Driver from './drivers/auth0';
 import makePicklistValuesDriver from './drivers/picklistValues';
 import routes from './routes';
 import { clientId, domain, options } from './auth0.config';
-
-import 'normalize.css/normalize.css';
-import 'semantic-ui-css/semantic.min.css';
 import './styles.css';
-
 import appLayout from './ui/appLayout';
 
 function main(sources) {
@@ -30,7 +28,7 @@ function main(sources) {
   // })
 
   const redirectAfterLogin = sources.auth0.on(['authenticated'])
-    .map(({ state }) => window.atob(state))
+    .map(({ state }) => window.atob(state));
 
   // sources.auth0.on(['authenticated']).addListener({
   //     next: i => console.log('AUTH0 authenticated event', i),
@@ -40,15 +38,14 @@ function main(sources) {
 
   const app$ = sources.router
     .map(render => render(sources))
-    .map(component => appLayout(sources, component))
+    .map(component => appLayout(sources, component));
 
   const sinks = sources.auth0.token$
       .filter(token => !!token)
       .mapTo(app$)
       .flatten();
 
-  const page$ = sinks.map(page => page.DOM)
-    .flatten()
+  const page$ = sinks.map(page => page.DOM).flatten();
     // .map(pageDOM => div(
     //   [ a('.navLink', { props: { href: '/' } }, 'HOME')
     //   , a('.navLink', { props: { href: '/student' } }, 'STUDENTS')
@@ -70,13 +67,13 @@ function main(sources) {
   };
 }
 
-const drivers =
-  { DOM: makeDOMDriver('#app')
-  , history: captureClicks(makeHistoryDriver())
-  , router: makeRouterDriver(routes)
-  , auth0: makeAuth0Driver(clientId, domain, options)
-  , picklistValues: makePicklistValuesDriver(['School'])
-  };
+const drivers = {
+  DOM: makeDOMDriver('#app'),
+  history: captureClicks(makeHistoryDriver()),
+  router: makeRouterDriver(routes),
+  auth0: makeAuth0Driver(clientId, domain, options),
+  picklistValues: makePicklistValuesDriver(['School'])
+};
 
 const dispose = run(main, drivers);
 
